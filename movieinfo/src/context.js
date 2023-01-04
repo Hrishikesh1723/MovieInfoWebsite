@@ -1,15 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
 const AppContext = React.createContext();
 
-const API_URL = `http://www.omdbapi.com/?apikey=727bbdc1&s=titanic`
+const API_URL = process.env.REACT_APP_API_KEY
 
 //provider function
 const AppProvider = ({ children }) => {
   const [isLoading, setIsloading] = useState(true);
   const [movie, setMovie] = useState([ ]);
   const [isError, setIsError] = useState({ show: "false", msg: ""});
+  const [query, setQuery] = useState("titanic");
 
   const getMovies = async (url) =>{
+    setIsloading(true);
     try{
       const res = await fetch(url);
       const data = await res.json();
@@ -30,10 +32,14 @@ const AppProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    getMovies(API_URL);
-  }, []);
+    let timeout = setTimeout(() => {
+      getMovies(`${API_URL}&s=${query}`);
+    }, 800)
 
-  return <AppContext.Provider value={{isLoading, isError, movie}}>
+    return () =>  clearTimeout(timeout); 
+  }, [query]);
+
+  return <AppContext.Provider value={{isLoading, isError, movie, query, setQuery}}>
       {children}
     </AppContext.Provider>;
 };

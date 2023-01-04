@@ -8,11 +8,12 @@ const Movies = () => {
   <section className="movie-page">
     <div className="gird grid-4-col">{movie.map((currMovie) => {
       const { imdbID, Title, Poster } =  currMovie;
+      const movieTitle = Title.substring(0, 15);
       return(
         <NavLink to={`movies/${imdbID}`} key={imdbID}> 
           <div className="card">
             <div className="card-info">
-              <h2>{Title}</h2>
+              <h2>{Title.length > 15 ? `${movieTitle}...` : movieTitle}</h2>
               <img src={Poster} alt={imdbID} />
             </div>
           </div>
