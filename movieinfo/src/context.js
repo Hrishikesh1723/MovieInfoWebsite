@@ -18,11 +18,15 @@ const AppProvider = ({ children }) => {
       console.log(data);
       if(data.Response === "True") {
         setIsloading(false);
+        setIsError({
+          show: false,
+          msg: "",
+        });
         setMovie(data.Search);
       } else {
         setIsError({
           show: true,
-          msg: data.error,
+          msg: data.Error,
         });
       }
     }catch(error){
@@ -34,7 +38,7 @@ const AppProvider = ({ children }) => {
   useEffect(() => {
     let timeout = setTimeout(() => {
       getMovies(`${API_URL}&s=${query}`);
-    }, 800)
+    }, 500)
 
     return () =>  clearTimeout(timeout); 
   }, [query]);
