@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink, useParams } from 'react-router-dom'
 
-const API_URL = process.env.REACT_APP_API_KEY
+const API_URL = "http://www.omdbapi.com/?apikey=533c3dc9"
 
 const MovieDisplay = () => {
   const {id} = useParams(); 

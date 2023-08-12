@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 const AppContext = React.createContext();
 
-const API_URL = process.env.REACT_APP_API_KEY
+const API_URL = "http://www.omdbapi.com/?apikey=533c3dc9"
 
 //provider function
 const AppProvider = ({ children }) => {
