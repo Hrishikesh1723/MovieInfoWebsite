@@ -16,6 +16,7 @@ const Search = () => {
         onChange={(e) => setQuery(e.target.value)}
         />
       </div>
+      
 
     </form>
     <div className="card-error">
